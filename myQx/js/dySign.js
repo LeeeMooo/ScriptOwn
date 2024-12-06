@@ -34,7 +34,7 @@ async function douyu() {
 		const reqUrl = commonJS.request.url
 		if (reqUrl.includes(tokenUrl)) {
 			const reqBody = getParam(commonJS.request.body, "&", "=")
-			const cookie = commonJS.request.headers["Cookie"]
+			const cookie = commonJS.request.headers["cookie"]
 			const oldToken = commonJS.read(tokenKey, 'default')
 			commonJS.log("cookie: " + cookie)
 			commonJS.write(cookieKey, cookie, 'default')
