@@ -29,19 +29,6 @@ const yubaSignOptions = {
 	}
 }
 
-const dolotteryOptions = {
-	url: "https://apiv2.douyucdn.cn/japi/activepointnc/apinc/doSeniorLotteryV2?client_sys=android",
-	headers: {
-		"Host": "apiv2.douyucdn.cn",
-		"Accept-Encoding": "gzip",
-		"token": "",
-		"Content-Type": "application/x-www-form-urlencoded",
-		"User-Agent": "android/7.0.6.1 (android 7.1.2; ; LIO-AN00)",
-		"aid": "android1",
-	},
-	body: ''
-}
-
 async function douyu() {
 	if (commonJS.isRequest) {
 		const reqUrl = commonJS.request.url
@@ -49,9 +36,9 @@ async function douyu() {
 			const reqBody = getParam(commonJS.request.body, "&", "=")
 			const cookie = commonJS.request.headers["Cookie"]
 			const oldToken = commonJS.read(tokenKey, 'default')
+			commonJS.write(cookieKey, cookie, 'default')
 			if (oldToken !== reqBody.token) {
 				commonJS.write(tokenKey, reqBody.token, 'default')
-				commonJS.write(cookieKey, cookie, 'default')
 				commonJS.notify(scriptName, "", "🎈获取token和cookie成功")
 			} else {
 				commonJS.log("token无变化,无需更新")
